@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: birdsquawk
+spec:
+  containers:
+    - name: birdsquawk
+      image: nivekrapull/birdsquawk

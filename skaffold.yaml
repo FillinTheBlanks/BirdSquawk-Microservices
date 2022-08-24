@@ -1,0 +1,42 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./config/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: nivekrapull/birdsquawk
+      context: BirdSquawk-Service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: nivekrapull/front-end
+      context: front-end
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: nivekrapull/peep
+      context: Peeps-Service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: nivekrapull/query
+      context: Query-Service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .

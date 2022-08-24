@@ -1,0 +1,41 @@
+if kubectl unable to start:
+minikube start --driver=docker
+
+npx create-next-app
+
+
+docker build -t nivekrapull/front-end .
+docker push nivekrapull/front-end
+
+
+kubectl apply -f front-end-depl.yaml
+
+kubectl get pods
+kubectl get services
+
+docker build -t nivekrapull/front-end .
+docker push nivekrapull/front-end
+
+choco install -y skaffold
+
+skaffold dev
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+
+kubectl get pods --namespace=ingress-nginx -l app.kubernetes.io/name=ingress-nginx --watch
+
+kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80
+
+kubectl describe ingress ingress-service
+
+kubectl get services -n ingress-nginx
+
+kubectl get all
+
+npx kill-port 8080
+
+kubectl delete all --all
+
+npm remove axios cors nodemon
+
+npm i amqplib
